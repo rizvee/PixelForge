@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Pixel Art Maker | Create & Animate Pixel Art — PixelForge</title>
+  <meta name="description" content="Make pixel art online for free. 16x16, 32x32 grids, animation frames, symmetry tools, and export as PNG or GIF. No software needed.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/pixel-art.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Pixel Art Maker</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-import">Import JSON</button>
+      <button class="btn btn-primary btn-sm" id="btn-export">Export</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <div class="top-toolbar panel">
+      <div class="toolbar-group">
+        <label>Grid: 
+          <select class="select" id="grid-size">
+            <option value="8">8x8</option>
+            <option value="16" selected>16x16</option>
+            <option value="32">32x32</option>
+            <option value="64">64x64</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="show-grid" checked> Grid Lines</label>
+        <label>Zoom: <input type="range" class="range" id="zoom-slider" min="5" max="40" value="20"> <span id="zoom-val">20px</span></label>
+      </div>
+      <div class="toolbar-group">
+        <button class="btn-icon tooltip" id="btn-undo" data-tip="Undo (Ctrl+Z)">↩</button>
+        <button class="btn-icon tooltip" id="btn-redo" data-tip="Redo (Ctrl+Y)">↪</button>
+      </div>
+    </div>
+
+    <div class="main-workspace">
+      <aside class="left-sidebar panel">
+        <div class="tool-buttons">
+          <button class="btn-icon active tooltip" data-tool="pencil" data-tip="Pencil (P)">✏️</button>
+          <button class="btn-icon tooltip" data-tool="eraser" data-tip="Eraser (E)">🧹</button>
+          <button class="btn-icon tooltip" data-tool="fill" data-tip="Fill Bucket (G)">🪣</button>
+          <button class="btn-icon tooltip" data-tool="picker" data-tip="Color Picker (I)">💉</button>
+          <button class="btn-icon tooltip" data-tool="line" data-tip="Line (L)">📏</button>
+          <button class="btn-icon tooltip" data-tool="rect" data-tip="Rectangle (R)">⬜</button>
+        </div>
+
+        <div class="symmetry-settings" style="padding:16px;">
+          <label>Symmetry:</label>
+          <select class="select w-full" id="symmetry-mode">
+            <option value="none">None</option>
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+
+        <div class="color-panel">
+          <h3>Palette</h3>
+          <div class="color-active-display">
+            <input type="color" id="primary-color" value="#000000" class="input">
+          </div>
+          <div class="palette-grid" id="palette-grid"></div>
+        </div>
+      </aside>
+
+      <main class="canvas-wrapper">
+        <div id="grid-container" class="grid-container">
+          <canvas id="pixel-canvas"></canvas>
+          <canvas id="grid-overlay-canvas"></canvas>
+        </div>
+      </main>
+
+      <aside class="right-sidebar panel">
+        <div class="animation-panel">
+          <h3>Animation</h3>
+          <div class="preview-box">
+            <canvas id="anim-preview-canvas" width="128" height="128"></canvas>
+          </div>
+          <div class="anim-controls">
+            <button class="btn-icon" id="btn-play">▶️</button>
+            <label>FPS: <input type="number" class="input" id="fps-input" value="12" min="1" max="24" style="width:60px"></label>
+          </div>
+          <label class="toggle-row" style="padding:0; margin-top:8px;">
+            <input type="checkbox" id="onion-skin"> Onion Skin
+          </label>
+        </div>
+        
+        <div class="frames-panel">
+          <div class="frames-header">
+            <h3>Frames</h3>
+            <button class="btn-icon btn-sm" id="btn-add-frame">➕</button>
+          </div>
+          <div class="frames-list" id="frames-list"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal-backdrop" id="export-modal">
+    <div class="modal-box">
+      <h3>Export Pixel Art</h3>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:16px;">
+        <button class="btn btn-primary" id="export-png-1x">Download PNG (1x)</button>
+        <button class="btn btn-secondary" id="export-png-8x">Download PNG (8x upscaled)</button>
+        <button class="btn btn-secondary" id="export-gif">Download Animated GIF</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('export-modal').classList.remove('open')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+  <script src="./js/pixel-art.js"></script>
+</body>
+</html>

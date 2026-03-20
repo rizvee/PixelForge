@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Filter & Glassmorphism Playground Online — PixelForge</title>
+  <meta name="description" content="Experiment with CSS filter, backdrop-filter, and mix-blend-mode online. Build glassmorphism UIs, blend modes, and get the CSS code instantly.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/css-filter-playground.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>CSS Filter & Blend Playground</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-primary btn-sm" id="btn-copy-css">Copy All CSS</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <main class="workspace">
+      <!-- Background pattern/image to show off glassmorphism/blend -->
+      <div class="playground-bg" id="pg-bg">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+      </div>
+
+      <!-- Target Element -->
+      <div id="target-element" class="target-card">
+        <div class="target-content">
+          <h3 style="font-size:1.5rem; margin-bottom:8px">Glass & Blend</h3>
+          <p style="color:rgba(255,255,255,0.8); font-size:0.9rem;">Interact with the sliders on the right to adjust how this element interacts with its background using <code>filter</code>, <code>backdrop-filter</code>, and <code>mix-blend-mode</code>.</p>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right-sidebar panel">
+      <div class="panel-section">
+        <h3>Target Element</h3>
+        <select class="select w-full" id="param-target-type" style="margin-bottom:8px">
+          <option value="card" selected>UI Card (Glassmorphism)</option>
+          <option value="image">Image Element</option>
+          <option value="text">Typography</option>
+        </select>
+        
+        <div class="control-group" id="bg-color-group">
+          <label>Background Color (rgba):</label>
+          <div style="display:flex; gap:8px">
+              <input type="color" id="param-bg-col" class="input p-0" value="#ffffff" style="width:40px;height:36px">
+              <input type="range" class="range" id="param-bg-alpha" min="0" max="1" step="0.05" value="0.1" style="flex:1">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Backdrop Filter (Glass)</h3>
+        <div class="control-group">
+          <label>Blur: <span id="val-bf-blur">10px</span></label>
+          <input type="range" class="range bf-slider" data-prop="blur" data-unit="px" min="0" max="50" value="10">
+        </div>
+        <div class="control-group">
+          <label>Brightness: <span id="val-bf-bright">100%</span></label>
+          <input type="range" class="range bf-slider" data-prop="brightness" data-unit="%" min="0" max="200" value="100">
+        </div>
+        <div class="control-group">
+          <label>Saturate: <span id="val-bf-sat">100%</span></label>
+          <input type="range" class="range bf-slider" data-prop="saturate" data-unit="%" min="0" max="300" value="100">
+        </div>
+        <div class="control-group">
+          <label>Contrast: <span id="val-bf-cont">100%</span></label>
+          <input type="range" class="range bf-slider" data-prop="contrast" data-unit="%" min="0" max="200" value="100">
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Mix Blend Mode</h3>
+        <select class="select w-full" id="param-blend">
+          <option value="normal" selected>normal</option>
+          <option value="multiply">multiply</option>
+          <option value="screen">screen</option>
+          <option value="overlay">overlay</option>
+          <option value="darken">darken</option>
+          <option value="lighten">lighten</option>
+          <option value="color-dodge">color-dodge</option>
+          <option value="color-burn">color-burn</option>
+          <option value="hard-light">hard-light</option>
+          <option value="soft-light">soft-light</option>
+          <option value="difference">difference</option>
+          <option value="exclusion">exclusion</option>
+          <option value="hue">hue</option>
+          <option value="saturation">saturation</option>
+          <option value="color">color</option>
+          <option value="luminosity">luminosity</option>
+        </select>
+      </div>
+
+      <div class="panel-section border-shadow">
+          <h3>Border & Shadow</h3>
+          <div class="control-group" id="border-group">
+            <label>Border Width: <span id="val-bd-w">1px</span></label>
+            <input type="range" class="range" id="param-bd-w" min="0" max="10" value="1">
+            <div style="display:flex; gap:8px; margin-top:4px;">
+               <input type="color" id="param-bd-col" class="input p-0" value="#ffffff" style="width:40px;height:30px">
+               <input type="range" class="range" id="param-bd-a" min="0" max="1" step="0.05" value="0.2" style="flex:1">
+            </div>
+          </div>
+          <div class="control-group" style="margin-top:12px;">
+            <label>Box Shadow Opacity: <span id="val-sh">20%</span></label>
+            <input type="range" class="range" id="param-sh" min="0" max="1" step="0.05" value="0.2">
+          </div>
+      </div>
+
+      <div class="panel-section" style="margin-top:auto">
+        <h3>Generated CSS</h3>
+        <pre><code id="output-css" style="font-family:var(--font-code); color:#a5b4fc; font-size:0.8rem; display:block; padding:8px; background:var(--bg-main); border-radius:4px; margin-top:8px; white-space:pre-wrap;"></code></pre>
+      </div>
+    </aside>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/css-filter-playground.js"></script>
+</body>
+</html>

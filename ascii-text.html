@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCII Art Generator Online | Convert Text to ASCII Art — PixelForge</title>
+  <meta name="description" content="Generate ASCII art text online. 20+ fonts including Big, Block, 3D, Bubble. Copy or download your ASCII art. Free online tool.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/ascii-text.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>ASCII Text Generator</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-copy">📋 Copy Art</button>
+      <button class="btn btn-primary btn-sm" id="btn-download">Download .txt</button>
+      <button class="btn btn-secondary btn-sm" id="btn-download-html">Download .html</button>
+    </div>
+  </header>
+
+  <div class="app-container" style="flex-direction:column;">
+    <!-- Top Input Section -->
+    <div class="top-controls panel">
+      <div class="input-main">
+        <textarea id="text-input" class="input w-full" placeholder="Type something..." rows="2">PixelForge</textarea>
+      </div>
+      
+      <div class="controls-grid">
+        <div class="control-group">
+          <label>Font Size: <span id="val-size">14px</span></label>
+          <input type="range" class="range" id="param-size" min="6" max="30" value="14">
+        </div>
+        
+        <div class="control-group">
+          <label>Font Style:</label>
+          <select class="select w-full" id="param-font">
+            <optgroup label="Real Fonts (Full Character Map)">
+              <option value="big">Big</option>
+              <option value="block">Block</option>
+            </optgroup>
+            <optgroup label="Stylized Previews (Approximations)">
+              <option value="banner">Banner</option>
+              <option value="bubble">Bubble</option>
+              <option value="digital">Digital</option>
+              <option value="slant">Slant</option>
+              <option value="3d">3-D</option>
+              <option value="shadow">Shadow</option>
+              <option value="gothic">Gothic</option>
+              <option value="starwars">Star Wars</option>
+              <option value="isometric">Isometric</option>
+              <option value="calvin">Calvin S</option>
+              <option value="ansi">ANSI Shadow</option>
+              <option value="doom">Doom</option>
+              <option value="larry3d">Larry 3D</option>
+              <option value="roman">Roman</option>
+              <option value="small">Small</option>
+              <option value="cyber">Cybermedium</option>
+              <option value="colossal">Colossal</option>
+              <option value="elite">Elite</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>Align:</label>
+          <div style="display:flex; gap:4px">
+            <button class="btn btn-secondary btn-sm align-btn active" data-align="left">Left</button>
+            <button class="btn btn-secondary btn-sm align-btn" data-align="center">Center</button>
+            <button class="btn btn-secondary btn-sm align-btn" data-align="right">Right</button>
+          </div>
+        </div>
+
+        <div class="control-group flex-row-center">
+          <label>Color:</label>
+          <input type="color" id="param-color" class="input p-0" value="#00ff41" style="width:40px;height:40px">
+        </div>
+        
+        <div class="control-group flex-row-center">
+          <label>Border:</label>
+          <select class="select" id="param-border">
+            <option value="none">None</option>
+            <option value="simple">Simple (#)</option>
+            <option value="double">Double (=)</option>
+            <option value="box">Box (┌─┐)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="workspace-main">
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="info-text" id="info-stats">Chars: 0 | Lines: 0</span>
+        </div>
+        <pre id="ascii-output" class="terminal-output"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/ascii-text.js"></script>
+</body>
+</html>

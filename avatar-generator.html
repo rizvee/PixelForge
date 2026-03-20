@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar Generator Online | Create Profile Pictures — PixelForge</title>
+  <meta name="description" content="Generate unique avatars from your name or seed word. Create Identicons, Initials, or Bauhaus abstract profile pictures instantly. Export PNG.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/avatar-generator.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Avatar Generator</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-export-svg">Download SVG</button>
+      <button class="btn btn-primary btn-sm" id="btn-export-png">Download PNG</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <main class="workspace">
+      <div id="avatar-preview-box">
+        <!-- We use an SVG element inside instead of canvas for crisp vector rendering -->
+        <svg id="avatar-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" shape-rendering="crispEdges"></svg>
+      </div>
+      <p style="color:var(--text-secondary); margin-top:24px;">Generated deterministically based on input seed.</p>
+    </main>
+
+    <aside class="right-sidebar panel">
+      <div class="panel-section">
+        <h3>Seed Text</h3>
+        <input type="text" class="input w-full" id="param-seed" placeholder="Enter username or email" value="PixelForge" style="font-size:1.1rem; padding:12px;">
+      </div>
+
+      <div class="panel-section">
+        <h3>Avatar Style</h3>
+        <div class="style-grid">
+          <button class="style-btn active" data-style="identicon">
+             <div class="style-img" style="background: url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 5 5\\'><rect width=\\'5\\' height=\\'5\\' fill=\\'%23f0f0f0\\'/><rect x=\\'1\\' y=\\'1\\' width=\\'1\\' height=\\'1\\' fill=\\'%23ef4444\\'/><rect x=\\'3\\' y=\\'1\\' width=\\'1\\' height=\\'1\\' fill=\\'%23ef4444\\'/><rect x=\\'2\\' y=\\'3\\' width=\\'1\\' height=\\'1\\' fill=\\'%23ef4444\\'/></svg>'); background-size: cover; image-rendering:pixelated"></div>
+             Identicon
+          </button>
+          <button class="style-btn" data-style="initials">
+             <div class="style-img" style="background: #3b82f6; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; font-size:24px;">AB</div>
+             Initials
+          </button>
+          <button class="style-btn" data-style="bauhaus">
+             <div class="style-img" style="background: #fdfbf7; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden">
+               <div style="position:absolute; width:150%; height:50%; background:#ef4444; border-radius:50%; top:-10%;"></div>
+               <div style="position:absolute; width:50%; height:150%; background:#eab308; right:10%;"></div>
+             </div>
+             Bauhaus
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Options</h3>
+        <div class="control-group">
+          <label>Shape:</label>
+          <select class="select w-full" id="param-shape">
+            <option value="square">Square</option>
+            <option value="circle">Circle</option>
+            <option value="rounded">Rounded Box</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>Palette Group:</label>
+          <select class="select w-full" id="param-palette">
+            <option value="vibrant">Vibrant Playful</option>
+            <option value="pastel">Soft Pastel</option>
+            <option value="dark">Dark Modern</option>
+            <option value="monochrome">Monochrome</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="panel-section" style="margin-top:auto">
+          <button class="btn btn-secondary w-full" onclick="document.getElementById('param-seed').value = Math.random().toString(36).substring(7); document.getElementById('param-seed').dispatchEvent(new Event('input'))">🎲 Randomize Seed</button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/avatar-generator.js"></script>
+</body>
+</html>

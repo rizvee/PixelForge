@@ -1,0 +1,89 @@
+body.tool-layout { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.tool-nav { height: 60px; background: var(--bg-surface); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--s-4); }
+.app-container { flex: 1; display: flex; overflow: hidden; }
+
+.canvas-workspace {
+  flex: 1;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  position: relative;
+}
+
+.canvas-box {
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  background: #fff;
+  transition: transform 0.2s;
+}
+#gen-canvas {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.right-sidebar {
+  width: 320px;
+  background: var(--bg-surface);
+  border-left: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.panel-section {
+  padding: var(--s-4);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.panel-section h3 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--s-2);
+}
+
+.palette-preview {
+  display: flex;
+  height: 20px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  margin-top: var(--s-2);
+}
+.palette-swatch { flex: 1; height: 100%; }
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+.control-group label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.gallery-strip {
+  height: 80px;
+  background: var(--bg-card);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--s-4);
+  gap: var(--s-2);
+  overflow-x: auto;
+}
+.history-thumb {
+  height: 60px;
+  width: 60px;
+  border-radius: var(--r-sm);
+  background: #000;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.history-thumb:hover { border-color: var(--accent-primary); }
+ 

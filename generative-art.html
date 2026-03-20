@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generative Art Generator Online | Create Unique Digital Art — PixelForge</title>
+  <meta name="description" content="Generate unique algorithmic art online. Circle packing, subdivision, Mondrian style and more. Free generative art tool, export as PNG.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/generative-art.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Generative Art Canvas</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-surprise">🎲 Surprise Me</button>
+      <button class="btn btn-primary btn-sm" id="btn-export">Export PNG</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <main class="canvas-workspace">
+      <div id="canvas-container" class="canvas-box">
+        <canvas id="gen-canvas" width="800" height="800"></canvas>
+      </div>
+    </main>
+
+    <aside class="right-sidebar panel">
+      <div class="panel-section">
+        <h3>Algorithm</h3>
+        <select class="select w-full" id="algo-select">
+          <option value="circle-packing">Circle Packing</option>
+          <option value="mondrian">Mondrian Grid</option>
+          <option value="recursive">Recursive Subdivision</option>
+          <option value="truchet">Truchet Tiles</option>
+          <option value="flow-field">Noise Flow Field (Simulated)</option>
+        </select>
+      </div>
+
+      <div class="panel-section">
+        <h3>Palette</h3>
+        <select class="select w-full" id="palette-select">
+          <option value="neon">Neon Lights</option>
+          <option value="ocean">Ocean Depths</option>
+          <option value="earth">Earth Tones</option>
+          <option value="pastel">Pastel Dream</option>
+          <option value="cyber">Cyberpunk</option>
+          <option value="monochrome">Monochrome</option>
+          <option value="fire">Fire & Brimstone</option>
+        </select>
+        <div class="palette-preview" id="palette-preview"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Settings</h3>
+        <div class="control-group">
+          <label>Density / Count: <span id="val-density">50</span></label>
+          <input type="range" class="range" id="param-density" min="10" max="200" value="50">
+        </div>
+        <div class="control-group">
+          <label>Complexity: <span id="val-complexity">5</span></label>
+          <input type="range" class="range" id="param-complexity" min="1" max="10" value="5">
+        </div>
+        <div class="control-group">
+          <label>Line Thickness: <span id="val-thickness">2</span></label>
+          <input type="range" class="range" id="param-thickness" min="0" max="10" value="2">
+        </div>
+        <div class="control-group">
+          <label>Seed (Deterministic):</label>
+          <input type="text" class="input w-full" id="param-seed" placeholder="Type anything...">
+        </div>
+        <div class="control-group" style="flex-direction:row; align-items:center; justify-content:space-between">
+          <label for="param-animate" style="margin:0">Auto-animate</label>
+          <input type="checkbox" id="param-animate">
+        </div>
+      </div>
+
+      <div class="panel-section" style="margin-top:auto">
+        <button class="btn btn-primary w-full" id="btn-generate" style="height:48px; font-size:1.1rem">Generate</button>
+      </div>
+    </aside>
+  </div>
+  
+  <div class="gallery-strip" id="history-gallery">
+    <!-- Mini thumbnails of past 12 generations -->
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/generative-art.js"></script>
+</body>
+</html>

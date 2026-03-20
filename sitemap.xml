@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://rizvee.github.io/pixelforge/index.html</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/sketchpad.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/pixel-art.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/particles.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/css-animations.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/generative-art.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/gradient-mesh.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/ascii-text.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/color-picker.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/image-filters.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/meme-generator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/avatar-generator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/image-to-ascii.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/css-filter-playground.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rizvee.github.io/pixelforge/svg-customizer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+</urlset>

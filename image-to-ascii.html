@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image to ASCII Converter Online | Turn Photos into Text Art — PixelForge</title>
+  <meta name="description" content="Instantly convert images to ASCII text art. Support for color ASCII, custom characters, and high resolution. Copy or download as TXT/HTML.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/image-to-ascii.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Image to ASCII</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-copy">📋 Copy ASCII</button>
+      <button class="btn btn-primary btn-sm" id="btn-dl-txt">Download .txt</button>
+      <button class="btn btn-secondary btn-sm" id="btn-dl-html">Download .html</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <main class="workspace" id="workspace">
+      <!-- Upload state -->
+      <div id="upload-overlay" class="upload-state">
+        <div class="upload-box card">
+          <div style="font-size:3rem; margin-bottom:16px;">🖼️➡#️⃣</div>
+          <h3 style="margin-bottom:8px">Upload Image</h3>
+          <p style="color:var(--text-secondary); margin-bottom:16px;">Drop a photo here to turn it into text art.</p>
+          <input type="file" id="file-input" accept="image/*" style="display:none">
+          <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Select Image</button>
+        </div>
+      </div>
+
+      <!-- Result state -->
+      <div id="result-container" style="display:none;">
+        <div id="ascii-output" class="ascii-output"></div>
+      </div>
+    </main>
+
+    <aside class="right-sidebar panel">
+      <div class="panel-section">
+        <h3>Conversion Settings</h3>
+        <div class="control-group">
+          <label>Resolution (Width): <span id="val-res">100ch</span></label>
+          <input type="range" class="range" id="param-res" min="20" max="300" value="100">
+        </div>
+        
+        <div class="control-group" style="margin-top:12px;">
+          <label>Density / Character Set:</label>
+          <select class="select w-full" id="param-chars">
+            <option value="standard">Standard (.,-~:;=!*#$@)</option>
+            <option value="detailed">Detailed (69 chars)</option>
+            <option value="blocks">Blocks (░▒▓█)</option>
+            <option value="binary">Binary (01)</option>
+            <option value="custom">Custom...</option>
+          </select>
+        </div>
+        <div class="control-group mt-2" id="custom-char-box" style="display:none;">
+            <input type="text" class="input w-full" id="param-custom" value=" .-+=#@" placeholder="Darkest to lightest">
+            <small style="color:var(--text-muted); font-size:0.75rem;">Dark to Light</small>
+        </div>
+
+        <div class="control-group" style="margin-top:12px;">
+          <label>Color Mode:</label>
+          <select class="select w-full" id="param-color">
+            <option value="mono">Monochrome (Green)</option>
+            <option value="mono-white">Monochrome (White)</option>
+            <option value="color">Full Color HTML</option>
+          </select>
+        </div>
+        
+        <div class="control-group flex-row-center" style="margin-top:12px;">
+            <label for="param-invert" style="margin:0; flex:1">Invert Colors</label>
+            <input type="checkbox" id="param-invert">
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="control-group">
+          <label>Contrast Boost: <span id="val-contrast">0%</span></label>
+          <input type="range" class="range" id="param-contrast" min="0" max="100" value="0">
+        </div>
+        <div class="control-group" style="margin-top:12px;">
+          <label>Brightness: <span id="val-bright">0</span></label>
+          <input type="range" class="range" id="param-bright" min="-100" max="100" value="0">
+        </div>
+      </div>
+
+      <div class="panel-section" style="margin-top:auto">
+          <button class="btn btn-secondary w-full" onclick="document.getElementById('file-input').click()">Upload New Image</button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/image-to-ascii.js"></script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelForge | Free Online Creative Tools — Drawing, Pixel Art, Image Editor & More</title>
+  <meta name="description" content="PixelForge is a free browser-based creative toolkit. Drawing sketchpad, pixel art maker, image filters, meme generator, ASCII art, gradient mesh, generative art and more. No install, no login, 100% free.">
+  <meta name="author" content="Hasan Rizvee">
+  <link rel="canonical" href="https://rizvee.github.io/pixelforge/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="PixelForge | Free Online Creative Tools — Drawing, Pixel Art, Image Editor & More">
+  <meta property="og:description" content="PixelForge is a free browser-based creative toolkit. Drawing sketchpad, pixel art maker, image filters, meme generator, ASCII art, gradient mesh, generative art and more. No install, no login, 100% free.">
+  <meta property="og:image" content="https://rizvee.github.io/pixelforge/assets/og-image.png">
+  <meta property="og:url" content="https://rizvee.github.io/pixelforge/">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PixelForge | Free Online Creative Tools">
+  <meta name="twitter:description" content="PixelForge is a free browser-based creative toolkit. Drawing, pixel art, image filters, meme generator and more.">
+  <meta name="twitter:image" content="https://rizvee.github.io/pixelforge/assets/og-image.png">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./css/global.css">
+  
+  <style>
+    /* Home Specific CSS */
+    .hero-section {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--s-10) var(--s-4);
+      overflow: hidden;
+    }
+    .hero-bg-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    .hero-content {
+      max-width: 800px;
+      z-index: 10;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      margin-bottom: var(--s-4);
+      background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      margin-bottom: var(--s-8);
+      max-width: 600px;
+      margin-inline: auto;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: var(--s-4);
+      justify-content: center;
+      margin-bottom: var(--s-8);
+      flex-wrap: wrap;
+    }
+    .trust-badges {
+      display: flex;
+      gap: var(--s-6);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: var(--s-2);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-bottom: var(--s-10);
+      font-weight: 700;
+    }
+
+    .tools-grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--s-10) var(--s-4);
+    }
+    .tools-subsection-title {
+      font-size: 1.5rem;
+      margin-bottom: var(--s-6);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      gap: var(--s-3);
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--s-6);
+      margin-bottom: var(--s-10);
+    }
+    .tool-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+    .tool-icon-wrapper {
+      height: 120px;
+      border-radius: var(--r-md) var(--r-md) 0 0;
+      background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-main));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .tool-info {
+      padding: var(--s-4);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .tool-title { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--s-2); }
+    .tool-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: var(--s-4); line-height: 1.4; flex-grow: 1; }
+    .tool-link-btn {
+      color: var(--accent-primary);
+      font-weight: 500;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all var(--t-fast);
+      display: inline-block;
+    }
+    .tool-card:hover .tool-link-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .features-section {
+      background: var(--bg-surface);
+      padding: var(--s-16) var(--s-4);
+    }
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--s-8);
+    }
+    .feature-card { text-align: center; }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--s-4);
+      display: inline-block;
+      padding: var(--s-4);
+      background: rgba(124, 58, 237, 0.1);
+      border-radius: var(--r-full);
+      color: var(--accent-primary);
+    }
+    .feature-title { font-size: 1.25rem; font-weight: 600; margin-bottom: var(--s-2); }
+    .feature-desc { color: var(--text-secondary); font-size: 0.95rem; }
+
+    .how-it-works {
+      padding: var(--s-16) var(--s-4);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .steps-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--s-8);
+      position: relative;
+    }
+    .step {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: var(--bg-card);
+      border: 2px solid var(--accent-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 auto var(--s-4);
+      color: var(--accent-primary);
+    }
+    .step-title { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--s-2); }
+    .step-desc { color: var(--text-secondary); font-size: 0.9rem; }
+
+    .author-section {
+      padding: var(--s-10) var(--s-4);
+      background: linear-gradient(to bottom, var(--bg-main), var(--bg-surface));
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["WebApplication", "SoftwareApplication", "ImageObject"],
+    "name": "PixelForge",
+    "description": "PixelForge is a free browser-based creative toolkit featuring a drawing sketchpad, pixel art maker, image filters, and more.",
+    "url": "https://rizvee.github.io/pixelforge/",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Hasan Rizvee",
+      "url": "https://rizvee.github.io"
+    }
+  }
+  </script>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+</head>
+<body>
+
+  <header class="nav-wrapper">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <span class="logo-text">⬡ PixelForge</span>
+      </a>
+      
+      <input type="checkbox" id="mob-menu-toggle">
+      <label for="mob-menu-toggle" class="hamburger">
+        <div></div><div></div><div></div>
+      </label>
+
+      <nav class="nav-links">
+        <div class="dropdown">
+          <span class="dropdown-toggle">🎨 Creative</span>
+          <div class="dropdown-menu">
+            <a href="sketchpad.html">✏️ Drawing Sketchpad</a>
+            <a href="pixel-art.html">🟦 Pixel Art Maker</a>
+            <a href="particles.html">✨ Particle System</a>
+            <a href="css-animations.html">🎬 CSS Animations</a>
+            <a href="generative-art.html">🖼️ Generative Art</a>
+            <a href="gradient-mesh.html">🌈 Gradient Mesh</a>
+            <a href="ascii-text.html">🔡 ASCII Text Art</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <span class="dropdown-toggle">📸 Image & Media</span>
+          <div class="dropdown-menu">
+            <a href="color-picker.html">🎨 Image Color Picker</a>
+            <a href="image-filters.html">🖼️ Image Filters</a>
+            <a href="meme-generator.html">😂 Meme Generator</a>
+            <a href="avatar-generator.html">👤 Avatar Generator</a>
+            <a href="image-to-ascii.html">🔤 Image to ASCII</a>
+            <a href="css-filter-playground.html">🎛️ CSS Filters</a>
+            <a href="svg-customizer.html">🔷 SVG Customizer</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="nav-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search tools..." aria-label="Search">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <canvas id="hero-canvas" class="hero-bg-canvas"></canvas>
+      <div class="hero-content">
+        <h1 class="hero-title animate-on-scroll">Create Without Limits</h1>
+        <p class="hero-subtitle animate-on-scroll">14 free browser-based creative tools. No installs. No logins. No watermarks. Ever.</p>
+        <div class="hero-ctas animate-on-scroll">
+          <a href="sketchpad.html" class="btn btn-primary">Start Creating →</a>
+          <a href="#tools" class="btn btn-secondary">Explore Tools ↓</a>
+        </div>
+        <div class="trust-badges animate-on-scroll">
+          <span class="trust-badge">✓ 100% Free</span>
+          <span class="trust-badge">✓ No Watermarks</span>
+          <span class="trust-badge">✓ Works Offline</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="tools" class="tools-grid-container">
+      <h2 class="section-title animate-on-scroll">Everything You Need to Create</h2>
+      
+      <!-- Creative Tools -->
+      <h3 class="tools-subsection-title animate-on-scroll">🎨 Creative Tools</h3>
+      <div class="tools-grid">
+        <a href="sketchpad.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">✏️</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Drawing Sketchpad</h4>
+            <p class="tool-desc">Digital canvas with pressure support, layers, and multiple brush types.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="pixel-art.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🟦</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Pixel Art Maker</h4>
+            <p class="tool-desc">Create grid-based pixel art with animation frames and GIF export.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="particles.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">✨</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Animated Particle System</h4>
+            <p class="tool-desc">Interactive canvas effects with physics simulations and presets.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="css-animations.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🎬</div>
+          <div class="tool-info">
+            <h4 class="tool-title">CSS Animation Showcase</h4>
+            <p class="tool-desc">Gallery of 30+ pure CSS animations with copy-paste code snippets.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="generative-art.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🖼️</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Generative Art Canvas</h4>
+            <p class="tool-desc">Algorithmic art creator using noise, subdivision, and packing algorithms.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="gradient-mesh.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🌈</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Gradient Mesh Generator</h4>
+            <p class="tool-desc">Drag control points to build complex mesh gradients for backgrounds.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="ascii-text.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🔡</div>
+          <div class="tool-info">
+            <h4 class="tool-title">ASCII Art Generator</h4>
+            <p class="tool-desc">Convert words into 20+ stylized ASCII text fonts with live previews.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Image & Media Tools -->
+      <h3 class="tools-subsection-title animate-on-scroll">📸 Image & Media</h3>
+      <div class="tools-grid">
+        <a href="color-picker.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🎨</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Image Color Picker</h4>
+            <p class="tool-desc">Extract dominant palettes and pick precise colors from photos.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="image-filters.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🖼️</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Image Filter App</h4>
+            <p class="tool-desc">Apply Instagram-style presets and edit photo properties locally.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="meme-generator.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">😂</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Meme Generator</h4>
+            <p class="tool-desc">Create watermark-free memes with custom templates and text overlays.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="avatar-generator.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">👤</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Avatar Generator</h4>
+            <p class="tool-desc">Build profile pictures from initials with colorful gradient backgrounds.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="image-to-ascii.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🔤</div>
+          <div class="tool-info">
+            <h4 class="tool-title">Image to ASCII</h4>
+            <p class="tool-desc">Convert uploaded images into dense text-based colored ASCII art.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="css-filter-playground.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🎛️</div>
+          <div class="tool-info">
+            <h4 class="tool-title">CSS Filter Playground</h4>
+            <p class="tool-desc">Experiment with image filters and instantly export production CSS code.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+        <a href="svg-customizer.html" class="tool-card card card-hover animate-on-scroll">
+          <div class="tool-icon-wrapper">🔷</div>
+          <div class="tool-info">
+            <h4 class="tool-title">SVG Icon Customizer</h4>
+            <p class="tool-desc">Change colors, sizes, and backgrounds of 200+ built-in icons.</p>
+            <span class="tool-link-btn">Open Tool →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <section class="features-section">
+      <h2 class="section-title animate-on-scroll">Built For Browser Performance</h2>
+      <div class="features-grid">
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🚀</div>
+          <h3 class="feature-title">Canvas-Powered</h3>
+          <p class="feature-desc">Hardware-accelerated rendering utilizing native HTML5 Canvas API for smooth performance.</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">💾</div>
+          <h3 class="feature-title">Export Anywhere</h3>
+          <p class="feature-desc">Export high-quality PNGs, JPGs, GIFs, SVGs, and code snippets directly from the browser.</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">🔒</div>
+          <h3 class="feature-title">Privacy First (nothing uploaded to servers)</h3>
+          <p class="feature-desc">Nothing is uploaded to any server. All processing happens locally on your device.</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">📱</div>
+          <h3 class="feature-title">PWA — Install as App</h3>
+          <p class="feature-desc">Install PixelForge as a lightweight, offline-capable app on your desktop or mobile device.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2 class="section-title animate-on-scroll">How It Works</h2>
+      <div class="steps-container">
+        <div class="step animate-on-scroll">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Choose a tool</h3>
+          <p class="step-desc">Pick from 14 specialized utilities to fit your exact creative need.</p>
+        </div>
+        <div class="step animate-on-scroll">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Create freely</h3>
+          <p class="step-desc">Utilize intuitive canvases, sliders, and controls to construct your design.</p>
+        </div>
+        <div class="step animate-on-scroll">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Export your work</h3>
+          <p class="step-desc">Save your masterpiece or copy production-ready code with a single click.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="author-section animate-on-scroll">
+      <h2>Built by a developer, for creators</h2>
+      <p style="color: var(--text-secondary); margin-top: var(--s-2);">Explore the codebase or check out other projects.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>🎨 Creative Tools</h3>
+        <ul>
+          <li><a href="sketchpad.html">Drawing Sketchpad</a></li>
+          <li><a href="pixel-art.html">Pixel Art Maker</a></li>
+          <li><a href="particles.html">Particle System</a></li>
+          <li><a href="css-animations.html">CSS Animations</a></li>
+          <li><a href="generative-art.html">Generative Art Canvas</a></li>
+          <li><a href="gradient-mesh.html">Gradient Mesh Generator</a></li>
+          <li><a href="ascii-text.html">ASCII Text Generator</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>📸 Image & Media</h3>
+        <ul>
+          <li><a href="color-picker.html">Image Color Picker</a></li>
+          <li><a href="image-filters.html">Image Filters App</a></li>
+          <li><a href="meme-generator.html">Meme Generator</a></li>
+          <li><a href="avatar-generator.html">Avatar Generator</a></li>
+          <li><a href="image-to-ascii.html">Image to ASCII</a></li>
+          <li><a href="css-filter-playground.html">CSS Filter Playground</a></li>
+          <li><a href="svg-customizer.html">SVG Customizer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Author</h3>
+        <div class="footer-author-box">
+          <p>Built with ♥ by Hasan Rizvee</p>
+          <a href="https://rizvee.github.io">🌐 portfolio -> rizvee.github.io</a>
+          <a href="https://github.com/rizvee">💻 github.com/rizvee</a>
+          <a href="https://linkedin.com/in/hasanrizvee">💼 linkedin.com/in/hasanrizvee</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 PixelForge — Free forever. No login. No watermarks.
+    </div>
+  </footer>
+
+  <script src="./js/global.js"></script>
+  <script>
+    // Simple animated canvas background for Hero section
+    const canvas = document.getElementById('hero-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      let particles = [];
+      const resize = () => {
+        w = canvas.width = canvas.parentElement.clientWidth;
+        h = canvas.height = canvas.parentElement.clientHeight;
+      };
+      
+      class GeometricParticle {
+        constructor() {
+          this.reset();
+          this.y = Math.random() * h;
+        }
+        reset() {
+          this.x = Math.random() * w;
+          this.y = h + Math.random() * 100;
+          this.size = Math.random() * 30 + 10;
+          this.speed = Math.random() * 0.5 + 0.1;
+          this.angle = Math.random() * Math.PI * 2;
+          this.rotSpeed = (Math.random() - 0.5) * 0.02;
+          this.type = Math.floor(Math.random() * 3); // 0=rect, 1=circle, 2=triangle
+        }
+        update() {
+          this.y -= this.speed;
+          this.angle += this.rotSpeed;
+          if (this.y < -50) this.reset();
+        }
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.angle);
+          ctx.strokeStyle = `rgba(124, 58, 237, 0.15)`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          if (this.type === 0) {
+            ctx.rect(-this.size/2, -this.size/2, this.size, this.size);
+          } else if (this.type === 1) {
+            ctx.arc(0, 0, this.size/2, 0, Math.PI * 2);
+          } else {
+            ctx.moveTo(0, -this.size/2);
+            ctx.lineTo(this.size/2, this.size/2);
+            ctx.lineTo(-this.size/2, this.size/2);
+            ctx.closePath();
+          }
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+
+      const init = () => {
+        resize();
+        particles = Array.from({length: 40}, () => new GeometricParticle());
+      };
+
+      const animate = () => {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+      };
+
+      window.addEventListener('resize', PF.ui.debounce(resize, 200));
+      init();
+      animate();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "PixelForge Creative Tools",
+  "short_name": "PixelForge",
+  "description": "Free Online Creative Tools — Drawing, Pixel Art, Image Editor & More",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d0d14",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%237c3aed'/><path d='M256 128L128 256l128 128 128-128z' fill='%23fff'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

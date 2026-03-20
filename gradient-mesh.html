@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Mesh Generator Online | Build & Export CSS Gradients — PixelForge</title>
+  <meta name="description" content="Create beautiful gradient mesh backgrounds online. Drag control points, pick colors, export as PNG or CSS code. Free gradient tool.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/gradient-mesh.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Gradient Mesh Generator</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-export-png">Export PNG</button>
+      <button class="btn btn-primary btn-sm" id="btn-copy-css">Copy CSS</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <main class="mesh-workspace">
+      <div id="mesh-viewport" class="mesh-viewport">
+        <div id="mesh-bg" class="mesh-bg"></div>
+        <svg id="mesh-svg-overlay" class="mesh-svg-overlay"></svg>
+        <div id="handles-container" class="handles-container"></div>
+      </div>
+    </main>
+
+    <aside class="right-sidebar panel">
+      <div class="panel-section">
+        <h3>Gradient Type</h3>
+        <div class="gradient-tabs">
+          <button class="g-tab active" data-type="mesh">Mesh</button>
+          <button class="g-tab" data-type="linear">Linear</button>
+          <button class="g-tab" data-type="radial">Radial</button>
+          <button class="g-tab" data-type="conic">Conic</button>
+        </div>
+      </div>
+
+      <!-- MESH CONTROLS -->
+      <div id="controls-mesh" class="controls-section active">
+        <div class="panel-section">
+          <h3>Grid Size</h3>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary btn-sm grid-btn" data-grid="2">2x2</button>
+            <button class="btn btn-primary btn-sm grid-btn" data-grid="3">3x3</button>
+            <button class="btn btn-secondary btn-sm grid-btn" data-grid="4">4x4</button>
+            <button class="btn btn-secondary btn-sm grid-btn" data-grid="5">5x5</button>
+          </div>
+          
+          <h3 style="margin-top:16px;">Presets</h3>
+          <select class="select w-full" id="mesh-presets">
+            <option value="aurora">Aurora Borealis</option>
+            <option value="sunset">Sunset</option>
+            <option value="ocean">Ocean Floor</option>
+            <option value="candy">Candy Pop</option>
+            <option value="neon">Neon Dreams</option>
+          </select>
+
+          <div class="control-group" style="margin-top:16px; flex-direction:row; align-items:center; justify-content:space-between">
+            <label for="mesh-animate" style="margin:0">Animate</label>
+            <input type="checkbox" id="mesh-animate">
+          </div>
+        </div>
+      </div>
+
+      <!-- STANDARD GRADIENT CONTROLS (Linear/Radial/Conic) -->
+      <div id="controls-standard" class="controls-section">
+        <div class="panel-section">
+          <div class="control-group" id="angle-control-group">
+            <label>Angle: <span id="val-angle">90deg</span></label>
+            <input type="range" class="range" id="grad-angle" min="0" max="360" value="90">
+          </div>
+          
+          <h3>Color Stops</h3>
+          <div id="color-stops-container" class="stops-container"></div>
+          <button class="btn btn-ghost btn-sm w-full" id="btn-add-stop" style="margin-top:8px;">+ Add Stop</button>
+        </div>
+      </div>
+
+      <!-- CSS OUTPUT -->
+      <div class="panel-section export-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3>CSS Output</h3>
+          <button class="btn-icon btn-sm" id="btn-copy-code" title="Copy to clipboard">📋</button>
+        </div>
+        <pre><code id="css-output-code"></code></pre>
+      </div>
+    </aside>
+  </div>
+  
+  <input type="color" id="hidden-color-picker" style="position:absolute; opacity:0; pointer-events:none;">
+
+  <script src="./js/global.js"></script>
+  <script src="./js/gradient-mesh.js"></script>
+</body>
+</html>

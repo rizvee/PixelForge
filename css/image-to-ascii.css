@@ -1,0 +1,57 @@
+body.tool-layout { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.tool-nav { height: 60px; background: var(--bg-surface); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--s-4); }
+.app-container { flex: 1; display: flex; overflow: hidden; }
+
+.workspace {
+  flex: 1;
+  background: var(--bg-main);
+  background-image: linear-gradient(45deg, #0d0d14 25%, transparent 25%, transparent 75%, #0d0d14 75%, #0d0d14), linear-gradient(45deg, #0d0d14 25%, transparent 25%, transparent 75%, #0d0d14 75%, #0d0d14);
+  background-size: 20px 20px; background-position: 0 0, 10px 10px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: auto; padding: var(--s-6);
+}
+
+.upload-state {
+  position: absolute; top:0; left:0; right:0; bottom:0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; padding: var(--s-4);
+}
+.upload-box {
+  width: 100%; max-width: 400px; text-align: center;
+  border: 2px dashed rgba(255,255,255,0.2);
+  background: rgba(22,22,42,0.8); backdrop-filter: blur(10px); padding: 32px; border-radius: var(--r-md);
+}
+.upload-box.dragover { border-color: var(--accent-primary); background: rgba(124,58,237,0.1); }
+
+#result-container {
+    width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    overflow: auto;
+}
+
+.ascii-output {
+    font-family: var(--font-code);
+    font-size: 8px; /* dynamic based on res via JS if needed */
+    line-height: 1;
+    white-space: pre;
+    color: #00ff41;
+    background: #000;
+    padding: var(--s-4);
+    border-radius: var(--r-sm);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* Letter spacing to fix aspect ratio of font characters */
+    letter-spacing: 2px;
+}
+.ascii-output.white { color: #fff; }
+
+/* Sidebar */
+.right-sidebar {
+  width: 320px; background: var(--bg-surface); border-left: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; overflow-y: auto; flex-shrink:0;
+}
+.panel-section { padding: var(--s-4); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+.control-group { display: flex; flex-direction: column; gap: 4px; }
+.control-group label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); }
+.flex-row-center { flex-direction: row; align-items: center; }
+.mt-2 { margin-top: 8px; }

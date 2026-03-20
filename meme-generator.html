@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meme Generator Online | Create Memes Free No Watermark — PixelForge</title>
+  <meta name="description" content="Make your own internet memes instantly. Add text to images, choose fonts, drag and drop text boxes. Free online meme maker with no watermarks.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/meme-generator.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+  </style>
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Meme Generator</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-primary btn-sm" id="btn-export">Download Meme (No Watermark)</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <main class="workspace" id="workspace">
+      <!-- Upload state -->
+      <div id="upload-overlay" class="upload-state">
+        <div class="upload-box card">
+          <div style="font-size:3rem; margin-bottom:16px;">😂</div>
+          <h3 style="margin-bottom:8px">Upload Template</h3>
+          <p style="color:var(--text-secondary); margin-bottom:16px;">Drag your image here, or pick a blank canvas.</p>
+          <div style="display:flex; justify-content:center; gap:8px;">
+            <input type="file" id="file-input" accept="image/*" style="display:none">
+            <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Upload Image</button>
+            <button class="btn btn-secondary" id="btn-blank">Blank Canvas</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editor Canvas -->
+      <div id="canvas-container" class="canvas-container" style="display:none;">
+        <canvas id="meme-canvas"></canvas>
+      </div>
+    </main>
+
+    <aside class="right-sidebar panel" id="sidebar">
+      <div class="panel-section">
+        <h3>Text Blocks</h3>
+        <div id="text-blocks-list" class="text-blocks-list">
+          <!-- Text controls injected here -->
+        </div>
+        <button class="btn btn-secondary w-full" id="btn-add-text" style="margin-top:16px;">+ Add Text Block</button>
+      </div>
+
+      <div class="panel-section">
+        <h3>Global Settings</h3>
+        <div class="control-group" style="margin-bottom:12px;">
+          <label>Font Size Factor: <span id="val-size">10%</span></label>
+          <input type="range" class="range" id="param-global-size" min="5" max="25" value="10">
+        </div>
+        
+        <div style="display:flex; gap:8px;">
+            <div class="control-group" style="flex:1">
+            <label>Text Color:</label>
+            <input type="color" class="input p-0 w-full" id="param-color" value="#ffffff" style="height:36px;">
+            </div>
+            <div class="control-group" style="flex:1">
+            <label>Stroke Color:</label>
+            <input type="color" class="input p-0 w-full" id="param-stroke" value="#000000" style="height:36px;">
+            </div>
+        </div>
+        <div class="control-group" style="margin-top:12px">
+            <label>Border Spacing: <span id="val-border">0px</span></label>
+            <input type="range" class="range" id="param-border" min="0" max="100" value="0">
+        </div>
+      </div>
+      
+      <div class="panel-section" style="margin-top:auto;">
+          <div class="upload-box" style="padding:16px; border-color:var(--bg-card); background:var(--bg-card);">
+             <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px">Need a new template?</p>
+             <button class="btn btn-secondary btn-sm w-full" onclick="document.getElementById('file-input').click()">Upload Different Image</button>
+          </div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/meme-generator.js"></script>
+</body>
+</html>

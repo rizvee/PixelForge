@@ -1,0 +1,152 @@
+body.tool-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-nav {
+  height: 60px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--s-4);
+}
+
+.filter-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: var(--s-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: var(--s-2);
+}
+.filter-tabs button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.filter-tabs button:hover, .filter-tabs button.active {
+  background: var(--accent-primary);
+  color: #fff;
+  border-color: var(--accent-primary);
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  flex-wrap: wrap;
+}
+
+.gallery-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-6);
+  background: var(--bg-main);
+}
+
+.masonry-grid {
+  column-count: 1;
+  column-gap: var(--s-6);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+@media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+@media (min-width: 1400px) { .masonry-grid { column-count: 4; } }
+
+.anim-card {
+  break-inside: avoid;
+  margin-bottom: var(--s-6);
+  background: var(--bg-card);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255,255,255,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.anim-preview-area {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: var(--bg-surface);
+  transition: background var(--t-fast);
+}
+.anim-preview-area.light-mode { background: #f0f0ff; color: #111; }
+.anim-preview-area.dark-mode { background: #111; color: #fff; }
+
+.bg-toggle {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: #fff;
+  border-radius: var(--r-full);
+  width: 28px; height: 28px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  z-index: 2;
+}
+
+.anim-info {
+  padding: var(--s-4);
+}
+.anim-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--s-2);
+}
+.anim-title { font-weight: 600; font-size: 1.1rem; }
+.anim-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: var(--s-4); line-height: 1.4; }
+
+.anim-actions {
+  display: flex;
+  gap: var(--s-2);
+}
+
+/* Code Modal */
+.code-tabs {
+  display: flex; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px;
+}
+.code-tab {
+  background: none; border: none; color: var(--text-secondary); padding: 8px 16px; cursor: pointer; border-bottom: 2px solid transparent;
+}
+.code-tab.active { color: var(--accent-primary); border-bottom-color: var(--accent-primary); }
+
+.code-content { display: none; position: relative; }
+.code-content.active { display: block; }
+.code-content pre {
+  background: #0d0d14; padding: 16px; border-radius: 8px; overflow-x: auto;
+  font-family: var(--font-code); font-size: 0.9rem; color: #d1d5db;
+  max-height: 400px;
+}
+.copy-btn { position: absolute; top: 12px; right: 12px; }
+
+/* 
+ * The actual injected animations will rely on global specific classes inside anim-preview-area 
+ * We use CSS variables for speed scaling globally applied to the container 
+ */
+.anim-preview-area * {
+  animation-duration: calc(var(--base-duration, 1s) / var(--global-speed, 1)) !important;
+}

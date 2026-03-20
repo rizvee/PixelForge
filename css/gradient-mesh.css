@@ -1,0 +1,90 @@
+body.tool-layout { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+.tool-nav { height: 60px; background: var(--bg-surface); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--s-4); }
+.app-container { flex: 1; display: flex; overflow: hidden; }
+
+.mesh-workspace {
+  flex: 1;
+  background: var(--bg-main);
+  background-image: 
+    linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), 
+    linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: var(--s-6);
+}
+
+.mesh-viewport {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16/9;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.mesh-bg {
+  position: absolute; top:0; left:0; width:100%; height:100%;
+  transition: filter 0.3s;
+}
+
+.mesh-svg-overlay {
+  position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;
+}
+.mesh-svg-overlay line { stroke: rgba(255,255,255,0.2); stroke-width: 1; stroke-dasharray: 4;}
+
+.handles-container {
+  position: absolute; top:0; left:0; width:100%; height:100%;
+}
+.mesh-handle {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.mesh-handle:active { cursor: grabbing; transform: translate(-50%, -50%) scale(1.1); }
+
+/* Sidebar */
+.right-sidebar {
+  width: 340px;
+  background: var(--bg-surface);
+  border-left: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.panel-section {
+  padding: var(--s-4);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.panel-section h3 { font-size: 1rem; color: var(--text-primary); margin-bottom: var(--s-3); }
+
+.gradient-tabs { display: flex; background: var(--bg-main); border-radius: var(--r-sm); overflow: hidden; }
+.g-tab { flex: 1; padding: var(--s-2); background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font-size: 0.9rem; }
+.g-tab.active { background: var(--accent-primary); color: #fff; }
+
+.controls-section { display: none; }
+.controls-section.active { display: block; }
+
+.control-group { margin-bottom: var(--s-3); display: flex; flex-direction: column; gap: 4px; }
+.control-group label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); }
+
+.export-panel { flex: 1; display: flex; flex-direction: column; }
+.export-panel pre { 
+  background: var(--bg-main); padding: var(--s-3); border-radius: var(--r-sm); 
+  font-family: var(--font-code); font-size: 0.85rem; color: #a5b4fc;
+  overflow-y: auto; flex: 1; margin-top: var(--s-2); white-space: pre-wrap; word-break: break-all;
+}
+
+.color-stop-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.btn-remove-stop { background: none; border: none; color: var(--accent-danger); cursor: pointer; }

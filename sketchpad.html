@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online Drawing Sketchpad | Digital Canvas with Layers — PixelForge</title>
+  <meta name="description" content="Draw and sketch online with PixelForge's free browser canvas. Brushes, shapes, layers, undo/redo, and PNG export. No install needed.">
+  <meta name="author" content="Hasan Rizvee">
+  <link rel="canonical" href="https://rizvee.github.io/pixelforge/sketchpad.html">
+  
+  <meta property="og:title" content="Free Online Drawing Sketchpad | Digital Canvas with Layers — PixelForge">
+  <meta property="og:description" content="Draw and sketch online with PixelForge's free browser canvas. Brushes, shapes, layers, undo/redo, and PNG export.">
+  <meta property="og:image" content="https://rizvee.github.io/pixelforge/assets/og-image.png">
+  <meta property="og:url" content="https://rizvee.github.io/pixelforge/sketchpad.html">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/sketchpad.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <!-- Minimal Tool Nav -->
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Drawing Sketchpad</h2>
+    <div class="tool-nav-actions">
+      <button class="btn btn-secondary btn-sm" id="btn-shortcuts">Keyboard Shortcuts (?)</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Top Toolbar -->
+    <div class="top-toolbar panel">
+      <div class="toolbar-group">
+        <label>Size: <input type="range" class="range" id="brush-size" min="1" max="100" value="10"> <span id="size-val">10px</span></label>
+        <label>Opacity: <input type="range" class="range" id="brush-opacity" min="0" max="1" step="0.05" value="1"> <span id="opacity-val">100%</span></label>
+      </div>
+      <div class="toolbar-group">
+        <button class="btn-icon tooltip" id="btn-undo" data-tip="Undo (Ctrl+Z)">↩</button>
+        <button class="btn-icon tooltip" id="btn-redo" data-tip="Redo (Ctrl+Y)">↪</button>
+        <button class="btn-icon tooltip" id="btn-clear" data-tip="Clear Canvas">🗑️</button>
+      </div>
+      <div class="toolbar-group">
+        <button class="btn btn-primary" id="btn-export">Export PNG</button>
+      </div>
+    </div>
+
+    <div class="main-workspace">
+      <!-- Left Sidebar (Tools) -->
+      <aside class="left-sidebar panel">
+        <div class="tool-buttons">
+          <button class="btn-icon active tooltip" data-tool="brush" data-tip="Brush (B)">🖌️</button>
+          <button class="btn-icon tooltip" data-tool="eraser" data-tip="Eraser (E)">🧹</button>
+          <button class="btn-icon tooltip" data-tool="fill" data-tip="Fill Bucket (G)">🪣</button>
+          <button class="btn-icon tooltip" data-tool="eyedropper" data-tip="Eyedropper (I)">💉</button>
+          <button class="btn-icon tooltip" data-tool="line" data-tip="Line">📏</button>
+          <button class="btn-icon tooltip" data-tool="rect" data-tip="Rectangle">⬜</button>
+          <button class="btn-icon tooltip" data-tool="circle" data-tip="Circle">⭕</button>
+        </div>
+
+        <div class="brush-settings" id="brush-type-cfg">
+          <label>Brush Type:</label>
+          <select class="select w-full" id="brush-type">
+            <option value="round">Round</option>
+            <option value="square">Square</option>
+            <option value="spray">Spray</option>
+            <option value="calligraphy">Calligraphy</option>
+          </select>
+        </div>
+
+        <div class="symmetry-settings">
+          <label>Symmetry:</label>
+          <select class="select w-full" id="symmetry-mode">
+            <option value="none">None</option>
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+            <option value="radial">Radial</option>
+          </select>
+        </div>
+        
+        <label class="toggle-row">
+          <input type="checkbox" id="grid-toggle"> Show Grid
+        </label>
+      </aside>
+
+      <!-- Center Canvas Area -->
+      <main class="canvas-wrapper" id="canvas-container">
+        <!-- The canvases will be injected here. One per layer, plus one for preview top. -->
+      </main>
+
+      <!-- Right Sidebar (Colors & Layers) -->
+      <aside class="right-sidebar panel">
+        <!-- Color Picker Section -->
+        <div class="color-panel">
+          <h3>Colors</h3>
+          <div class="color-active-display">
+            <div id="active-color-swatch" style="background:#7c3aed"></div>
+            <input type="color" id="native-color" value="#7c3aed">
+          </div>
+          <div class="color-history" id="color-history"></div>
+        </div>
+
+        <!-- Layers Panel -->
+        <div class="layers-panel">
+          <div class="layers-header">
+            <h3>Layers</h3>
+            <button class="btn-icon btn-sm" id="btn-add-layer" title="New Layer">➕</button>
+          </div>
+          <ul id="layers-list" class="layers-list">
+            <!-- Dynamic Layers go here -->
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/sketchpad.js"></script>
+</body>
+</html>

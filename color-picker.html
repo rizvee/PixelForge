@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Color Picker Online | Extract Colors from Photos — PixelForge</title>
+  <meta name="description" content="Pick colors from any image online. Get HEX, RGB, HSL, CMYK values. Auto-extract beautiful 8-color palettes. Export as CSS variables or Tailwind config.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/color-picker.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <header class="tool-nav">
+    <a href="index.html" class="back-link">← Home</a>
+    <h2>Image Color Picker</h2>
+  </header>
+
+  <div class="app-container">
+    <main class="image-workspace" id="drop-zone">
+      <!-- Upload Overlay -->
+      <div id="upload-overlay" class="upload-state">
+        <div class="upload-box card">
+          <div style="font-size:3rem; margin-bottom:16px;">🖼️</div>
+          <h3 style="margin-bottom:8px">Upload Image</h3>
+          <p style="color:var(--text-secondary); margin-bottom:16px;">Drag & drop, click to select, or paste from clipboard.</p>
+          <input type="file" id="file-input" accept="image/*" style="display:none">
+          <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Select File</button>
+        </div>
+      </div>
+      
+      <!-- Canvas Wrapper -->
+      <div id="img-container" style="display:none;" class="img-container">
+        <canvas id="img-canvas"></canvas>
+        <div id="hover-lens" class="hover-lens">
+          <div id="lens-color"></div>
+          <span id="lens-hex">#000000</span>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right-sidebar panel" id="sidebar">
+      <div class="panel-section">
+        <h3>Zoom: <span id="val-zoom">1x</span></h3>
+        <input type="range" class="range w-full" id="param-zoom" min="1" max="8" value="1">
+      </div>
+
+      <div class="panel-section">
+        <h3>Picked Color</h3>
+        <div class="picked-color-display">
+          <div id="active-swatch" class="large-swatch"></div>
+          <div class="color-values">
+            <div class="val-row">
+              <span class="val-label">HEX</span>
+              <span class="val-text" id="v-hex">#000000</span>
+              <button class="btn-icon btn-sm" onclick="PF.ui.copyToClipboard(document.getElementById('v-hex').textContent)">📋</button>
+            </div>
+            <div class="val-row">
+              <span class="val-label">RGB</span>
+              <span class="val-text" id="v-rgb">rgb(0,0,0)</span>
+              <button class="btn-icon btn-sm" onclick="PF.ui.copyToClipboard(document.getElementById('v-rgb').textContent)">📋</button>
+            </div>
+            <div class="val-row">
+              <span class="val-label">HSL</span>
+              <span class="val-text" id="v-hsl">hsl(0,0%,0%)</span>
+              <button class="btn-icon btn-sm" onclick="PF.ui.copyToClipboard(document.getElementById('v-hsl').textContent)">📋</button>
+            </div>
+            <div class="val-row">
+              <span class="val-label">CMYK</span>
+              <span class="val-text" id="v-cmyk">cmyk(0,0,0,100)</span>
+              <button class="btn-icon btn-sm" onclick="PF.ui.copyToClipboard(document.getElementById('v-cmyk').textContent)">📋</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary w-full" id="btn-add-palette" style="margin-top:16px;">Add to Palette</button>
+      </div>
+
+      <div class="panel-section">
+        <h3>Extracted Palette (Top 8)</h3>
+        <div id="extracted-palette" class="palette-grid"></div>
+      </div>
+
+      <div class="panel-section">
+        <div style="display:flex; justify-content:space-between">
+          <h3>Your Custom Palette</h3>
+          <button class="btn-icon btn-sm" id="btn-clear-palette" title="Clear">🗑️</button>
+        </div>
+        <div id="custom-palette" class="custom-palette-grid"></div>
+        <br>
+        <button class="btn btn-secondary w-full" id="btn-export-palette">Export Palette...</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal-backdrop" id="export-modal">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
+        <h3>Export Custom Palette</h3>
+        <button class="btn-icon btn-sm" onclick="document.getElementById('export-modal').classList.remove('open')">✕</button>
+      </div>
+      
+      <div style="display:flex; gap:8px; margin-bottom:16px;">
+        <select class="select flex-1" id="export-format">
+          <option value="css">CSS Variables</option>
+          <option value="tailwind">Tailwind Config</option>
+          <option value="scss">SCSS Map</option>
+          <option value="json">JSON Array</option>
+        </select>
+        <button class="btn btn-primary" id="btn-copy-export">Copy</button>
+      </div>
+      
+      <pre style="background:var(--bg-main); padding:16px; border-radius:8px;"><code id="export-code" style="color:#a5b4fc; font-family:var(--font-code);"></code></pre>
+      
+      <button class="btn btn-secondary w-full mt-4" id="btn-dl-png" style="margin-top:16px;">Download as PNG Swatch</button>
+    </div>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/color-picker.js"></script>
+</body>
+</html>

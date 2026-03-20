@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Particle System Online | Animated Canvas Art — PixelForge</title>
+  <meta name="description" content="Create stunning animated particle effects in your browser. Sparks, bubbles, stars, confetti, fireflies and more. Export as PNG.">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/particles.css">
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body class="tool-layout">
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="controls-panel card glass" id="controls-panel">
+    <div class="panel-header">
+      <a href="index.html" class="back-link">← Home</a>
+      <button class="btn-icon btn-sm" id="btn-toggle-panel">_</button>
+    </div>
+    
+    <div class="panel-body" id="panel-body">
+      <h3>Particle System</h3>
+      
+      <div class="control-group">
+        <label>Type:</label>
+        <select class="select w-full" id="p-type">
+          <option value="sparks">✨ Sparks</option>
+          <option value="bubbles">💧 Bubbles</option>
+          <option value="stars">⭐ Stars</option>
+          <option value="confetti">🎊 Confetti</option>
+          <option value="fireflies" selected>🔥 Fireflies</option>
+          <option value="snow">❄️ Snow</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>Count: <span id="val-count">100</span></label>
+        <input type="range" class="range" id="p-count" min="10" max="1000" value="100">
+      </div>
+      <div class="control-group">
+        <label>Speed: <span id="val-speed">2</span></label>
+        <input type="range" class="range" id="p-speed" min="0" max="10" step="0.1" value="2">
+      </div>
+      <div class="control-group">
+        <label>Size: <span id="val-size">10</span></label>
+        <input type="range" class="range" id="p-size" min="1" max="50" value="10">
+      </div>
+      <div class="control-group">
+        <label>Gravity: <span id="val-gravity">0</span></label>
+        <input type="range" class="range" id="p-gravity" min="-1" max="1" step="0.05" value="0">
+      </div>
+
+      <div class="control-group">
+        <label>Color Mode:</label>
+        <select class="select w-full" id="p-color">
+          <option value="single">Single Color</option>
+          <option value="gradient">Gradient</option>
+          <option value="rainbow" selected>Rainbow</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+      <div class="color-pickers" id="color-pickers" style="display:none; gap:8px;">
+        <input type="color" id="c1" value="#7c3aed" class="input">
+        <input type="color" id="c2" value="#06b6d4" class="input">
+      </div>
+      
+      <div class="control-group">
+        <label>Interaction:</label>
+        <select class="select w-full" id="p-interact">
+          <option value="spawn">Spawn on Click</option>
+          <option value="trail" selected>Mouse Trail</option>
+          <option value="attract">Attract</option>
+          <option value="repel">Repel</option>
+          <option value="orbit">Orbit</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>Presets:</label>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button class="btn btn-secondary btn-sm" id="pre-galaxy">Galaxy</button>
+          <button class="btn btn-secondary btn-sm" id="pre-fireworks">Fireworks</button>
+          <button class="btn btn-secondary btn-sm" id="pre-rain">Rain</button>
+          <button class="btn btn-secondary btn-sm" id="pre-matrix">Matrix</button>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary w-full" id="btn-export">Export Canvas</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/global.js"></script>
+  <script src="./js/particles.js"></script>
+</body>
+</html>
